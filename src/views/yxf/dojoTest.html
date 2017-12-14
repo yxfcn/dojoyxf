@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tutorial: Hello Dojo!</title>
+    <script>
+        window.dojoConfig={
+            deps:["js/yxf/WidgetTest"],
+            packages:[
+                {
+                    name:"js",
+                    location:window.location.origin+"/dojoyxf/src/js"
+                }
+            ]
+        }
+    </script>
+
+</head>
+<body>
+<h1 id="greeting">Hello</h1>
+
+<script src="http://localhost:8080/dojo/dojo13/dojo/dojo.js"
+        data-dojo-config="async: true"></script>
+<script>
+    require(["dojo/dom","dojo/on","dojo/dom-style","dojo/domReady!"],function(dom,on,domStyle){
+        var node=dom.byId("greeting");
+        on(node,"click",function(){
+            //domStyle.set(node,"background-color","red");
+            console.log("change color in the script in the html filee");
+            domStyle.set(node,"color","green");
+        })
+    })
+</script>
+</body>
+</html>
