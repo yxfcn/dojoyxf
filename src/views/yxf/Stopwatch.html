@@ -1,0 +1,32 @@
+<!DOCTYPE >
+<html>
+<head>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Dojo Stopwatch</title>
+
+    <script type="text/javascript">
+        dojoConfig = {
+            deps:["widgets/application"],
+            async: true,
+            packages: [{
+                name: 'widgets',
+                location: window.location.origin+"/dojoyxf/src/widgets"
+            }]
+        };
+        console.log(window.location.origin+"/dojoyxf/src/widgets");
+    </script>
+
+    <script src="http://localhost:8080/arcgis_js_api/3.22/init.js"></script>
+</head>
+
+<body class="claro">
+
+<input data-dojo-type="widgets/Stopwatch"/>
+
+<input data-dojo-type="widgets/Stopwatch" data-dojo-props="updateRate: 1"/>
+
+
+</body>
+</html>

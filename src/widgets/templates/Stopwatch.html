@@ -1,0 +1,13 @@
+<div class="${baseClass} dijitInline" data-dojo-attach-point="containerNode">
+    <p class="dijitInline">
+        <span data-dojo-attach-point="hoursNode">00</span> :
+        <span data-dojo-attach-point="minutesNode">00</span> :
+        <span data-dojo-attach-point="secondsNode">00</span> ::
+        <span data-dojo-attach-point="milliNode">000</span>
+    </p>
+
+    <button data-dojo-type="dijit/form/ToggleButton" data-dojo-attach-point="startBtn"
+            data-dojo-attach-event="onChange: onStart">${__nls.start}</button>
+    <button data-dojo-type="dijit/form/Button" data-dojo-attach-point="resetBtn"
+            data-dojo-attach-event="onClick: onReset" data-dojo-props="disabled: true">${__nls.reset}</button>
+</div>

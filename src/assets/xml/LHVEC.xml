@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Capabilities xmlns="http://www.opengis.net/wmts/1.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wmts/1.0 http://schemas.opengis.net/wmts/1.0.0/wmtsGetCapabilities_response.xsd" version="1.0.0">
+    <ows:ServiceIdentification>
+        <ows:Title>电子地图</ows:Title>
+        <ows:Abstract>电子地图</ows:Abstract>
+        <ows:Keywords>
+            <ows:Keyword>电子地图</ows:Keyword>
+        </ows:Keywords>
+        <ows:ServiceType>OGC WMTS</ows:ServiceType>
+        <ows:ServiceTypeVersion>1.0.0</ows:ServiceTypeVersion>
+        <ows:Fees>none</ows:Fees>
+        <ows:AccessConstraints>none</ows:AccessConstraints>
+    </ows:ServiceIdentification>
+    <ows:ServiceProvider>
+        <ows:ProviderName>临海市测绘与地理信息局</ows:ProviderName>
+        <ows:ProviderSite xlink:href="http://tmap.linhai.gov.cn/"/>
+        <ows:ServiceContact>
+            <ows:IndividualName/>
+            <ows:PositionName/>
+            <ows:ContactInfo>
+                <ows:Phone>
+                    <ows:Voice/>
+                    <ows:Facsimile/>
+                </ows:Phone>
+                <ows:Address>
+                    <ows:DeliveryPoint>浙江省台州市临海市东方大道8号</ows:DeliveryPoint>
+                    <ows:City>台州</ows:City>
+                    <ows:AdministrativeArea>建设大楼26楼</ows:AdministrativeArea>
+                    <ows:PostalCode>317100</ows:PostalCode>
+                    <ows:Country>中国</ows:Country>
+                    <ows:ElectronicMailAddress/>
+                </ows:Address>
+            </ows:ContactInfo>
+        </ows:ServiceContact>
+    </ows:ServiceProvider>
+    <ows:OperationsMetadata>
+        <ows:Operation name="GetCapabilities">
+            <ows:DCP>
+                <ows:HTTP>
+                    <ows:Get xlink:href="http://tmap.linhai.gov.cn/services/wmts/lhemap?">
+                        <ows:Constraint name="GetEncoding">
+                            <ows:AllowedValues>
+                                <ows:Value>KVP</ows:Value>
+                            </ows:AllowedValues>
+                        </ows:Constraint>
+                    </ows:Get>
+                </ows:HTTP>
+            </ows:DCP>
+        </ows:Operation>
+        <ows:Operation name="GetTile">
+            <ows:DCP>
+                <ows:HTTP>
+                    <ows:Get xlink:href="http://tmap.linhai.gov.cn/services/wmts/lhemap?">
+                        <ows:Constraint name="GetEncoding">
+                            <ows:AllowedValues>
+                                <ows:Value>KVP</ows:Value>
+                            </ows:AllowedValues>
+                        </ows:Constraint>
+                    </ows:Get>
+                </ows:HTTP>
+            </ows:DCP>
+        </ows:Operation>
+    </ows:OperationsMetadata>
+    <Contents>
+        <Layer>
+            <ows:Title>电子地图</ows:Title>
+            <ows:Abstract>电子地图</ows:Abstract>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-180 -90</ows:LowerCorner>
+                <ows:UpperCorner>180 90</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+            <ows:Identifier>lhemap</ows:Identifier>
+            <Style isDefault="true">
+                <ows:Identifier>default</ows:Identifier>
+            </Style>
+            <Format>image/png</Format>
+            <TileMatrixSetLink>
+                <TileMatrixSet>esritilematirx</TileMatrixSet>
+            </TileMatrixSetLink>
+            <ResourceURL format="" resourceType="tile" template="http://tmap.linhai.gov.cn/services/wmts/lhemap/lhemap/default/esritilematirx/{TileMatrix}/{TileRow}/{TileCol}"/>
+        </Layer>
+        <TileMatrixSet>
+            <ows:Identifier>esritilematirx</ows:Identifier>
+            <ows:SupportedCRS>urn:ogc:def:crs:EPSG::4490
+            </ows:SupportedCRS>
+            <!-- <WellKnownScaleSet>urn:ogc:def:wkss:OGC:1.0:GlobalCRS84Pixel</WellKnownScaleSet> -->
+
+            <TileMatrix>
+                <ows:Identifier>0</ows:Identifier>
+                <ScaleDenominator>590995197.14166915</ScaleDenominator>
+                <TopLeftCorner>-180 90</TopLeftCorner>
+                <TileWidth>256</TileWidth>
+                <TileHeight>256</TileHeight>
+                <MatrixWidth>1.0</MatrixWidth>
+                <MatrixHeight>1.0</MatrixHeight>
+            </TileMatrix><TileMatrix>
+            <ows:Identifier>1</ows:Identifier>
+            <ScaleDenominator>295497598.57083458</ScaleDenominator>
+            <TopLeftCorner>-180 90</TopLeftCorner>
+            <TileWidth>256</TileWidth>
+            <TileHeight>256</TileHeight>
+            <MatrixWidth>2.0</MatrixWidth>
+            <MatrixHeight>1.0</MatrixHeight>
+        </TileMatrix><TileMatrix>
+            <ows:Identifier>2</ows:Identifier>
+            <ScaleDenominator>147748799.28541729</ScaleDenominator>
+            <TopLeftCorner>-180 90</TopLeftCorner>
+            <TileWidth>256</TileWidth>
+            <TileHeight>256</TileHeight>
+            <MatrixWidth>4.0</MatrixWidth>
+            <MatrixHeight>1.0</MatrixHeight>
+        </TileMatrix><TileMatrix>
+            <ows:Identifier>3</ows:Identifier>
+            <ScaleDenominator>73874399.642708644</ScaleDenominator>
+            <TopLeftCorner>-180 90</TopLeftCorner>
+            <TileWidth>256</TileWidth>
+            <TileHeight>256</TileHeight>
+            <MatrixWidth>7.0</MatrixWidth>
+            <MatrixHeight>2.0</MatrixHeight>
+        </TileMatrix><TileMatrix>
+            <ows:Identifier>4</ows:Identifier>
+            <ScaleDenominator>36937199.821354322</ScaleDenominator>
+            <TopLeftCorner>-180 90</TopLeftCorner>
+            <TileWidth>256</TileWidth>
+            <TileHeight>256</TileHeight>
+            <MatrixWidth>14.0</MatrixWidth>
+            <MatrixHeight>3.0</MatrixHeight>
+        </TileMatrix><TileMatrix>
+            <ows:Identifier>5</ows:Identifier>
+            <ScaleDenominator>18468599.910677161</ScaleDenominator>
+            <TopLeftCorner>-180 90</TopLeftCorner>
+            <TileWidth>256</TileWidth>
+            <TileHeight>256</TileHeight>
+            <MatrixWidth>27.0</MatrixWidth>
+            <MatrixHeight>6.0</MatrixHeight>
+        </TileMatrix><TileMatrix>
+            <ows:Identifier>6</ows:Identifier>
+            <ScaleDenominator>9234299.9553385805</ScaleDenominator>
+            <TopLeftCorner>-180 90</TopLeftCorner>
+            <TileWidth>256</TileWidth>
+            <TileHeight>256</TileHeight>
+            <MatrixWidth>54.0</MatrixWidth>
+            <MatrixHeight>12.0</MatrixHeight>
+        </TileMatrix><TileMatrix>
+            <ows:Identifier>7</ows:Identifier>
+            <ScaleDenominator>4617149.9776692903</ScaleDenominator>
+            <TopLeftCorner>-180 90</TopLeftCorner>
+            <TileWidth>256</TileWidth>
+            <TileHeight>256</TileHeight>
+            <MatrixWidth>108.0</MatrixWidth>
+            <MatrixHeight>23.0</MatrixHeight>
+        </TileMatrix><TileMatrix>
+            <ows:Identifier>8</ows:Identifier>
+            <ScaleDenominator>2308574.9888346451</ScaleDenominator>
+            <TopLeftCorner>-180 90</TopLeftCorner>
+            <TileWidth>256</TileWidth>
+            <TileHeight>256</TileHeight>
+            <MatrixWidth>216.0</MatrixWidth>
+            <MatrixHeight>45.0</MatrixHeight>
+        </TileMatrix><TileMatrix>
+            <ows:Identifier>9</ows:Identifier>
+            <ScaleDenominator>1154287.4944173226</ScaleDenominator>
+            <TopLeftCorner>-180 90</TopLeftCorner>
+            <TileWidth>256</TileWidth>
+            <TileHeight>256</TileHeight>
+            <MatrixWidth>432.0</MatrixWidth>
+            <MatrixHeight>90.0</MatrixHeight>
+        </TileMatrix><TileMatrix>
+            <ows:Identifier>10</ows:Identifier>
+            <ScaleDenominator>577143.74720866128</ScaleDenominator>
+            <TopLeftCorner>-180 90</TopLeftCorner>
+            <TileWidth>256</TileWidth>
+            <TileHeight>256</TileHeight>
+            <MatrixWidth>863.0</MatrixWidth>
+            <MatrixHeight>180.0</MatrixHeight>
+        </TileMatrix><TileMatrix>
+            <ows:Identifier>11</ows:Identifier>
+            <ScaleDenominator>288571.87360433064</ScaleDenominator>
+            <TopLeftCorner>-180 90</TopLeftCorner>
+            <TileWidth>256</TileWidth>
+            <TileHeight>256</TileHeight>
+            <MatrixWidth>1726.0</MatrixWidth>
+            <MatrixHeight>359.0</MatrixHeight>
+        </TileMatrix><TileMatrix>
+            <ows:Identifier>12</ows:Identifier>
+            <ScaleDenominator>144285.93680216532</ScaleDenominator>
+            <TopLeftCorner>-180 90</TopLeftCorner>
+            <TileWidth>256</TileWidth>
+            <TileHeight>256</TileHeight>
+            <MatrixWidth>3451.0</MatrixWidth>
+            <MatrixHeight>717.0</MatrixHeight>
+        </TileMatrix><TileMatrix>
+            <ows:Identifier>13</ows:Identifier>
+            <ScaleDenominator>72142.96840108266</ScaleDenominator>
+            <TopLeftCorner>-180 90</TopLeftCorner>
+            <TileWidth>256</TileWidth>
+            <TileHeight>256</TileHeight>
+            <MatrixWidth>6901.0</MatrixWidth>
+            <MatrixHeight>1433.0</MatrixHeight>
+        </TileMatrix><TileMatrix>
+            <ows:Identifier>14</ows:Identifier>
+            <ScaleDenominator>36071.48420054133</ScaleDenominator>
+            <TopLeftCorner>-180 90</TopLeftCorner>
+            <TileWidth>256</TileWidth>
+            <TileHeight>256</TileHeight>
+            <MatrixWidth>13802.0</MatrixWidth>
+            <MatrixHeight>2866.0</MatrixHeight>
+        </TileMatrix><TileMatrix>
+            <ows:Identifier>15</ows:Identifier>
+            <ScaleDenominator>18035.742100270665</ScaleDenominator>
+            <TopLeftCorner>-180 90</TopLeftCorner>
+            <TileWidth>256</TileWidth>
+            <TileHeight>256</TileHeight>
+            <MatrixWidth>27603.0</MatrixWidth>
+            <MatrixHeight>5732.0</MatrixHeight>
+        </TileMatrix><TileMatrix>
+            <ows:Identifier>16</ows:Identifier>
+            <ScaleDenominator>9017.8710501353326</ScaleDenominator>
+            <TopLeftCorner>-180 90</TopLeftCorner>
+            <TileWidth>256</TileWidth>
+            <TileHeight>256</TileHeight>
+            <MatrixWidth>55205.0</MatrixWidth>
+            <MatrixHeight>11464.0</MatrixHeight>
+        </TileMatrix><TileMatrix>
+            <ows:Identifier>17</ows:Identifier>
+            <ScaleDenominator>4508.9355250676663</ScaleDenominator>
+            <TopLeftCorner>-180 90</TopLeftCorner>
+            <TileWidth>256</TileWidth>
+            <TileHeight>256</TileHeight>
+            <MatrixWidth>110410.0</MatrixWidth>
+            <MatrixHeight>22927.0</MatrixHeight>
+        </TileMatrix><TileMatrix>
+            <ows:Identifier>18</ows:Identifier>
+            <ScaleDenominator>2254.4677625338331</ScaleDenominator>
+            <TopLeftCorner>-180 90</TopLeftCorner>
+            <TileWidth>256</TileWidth>
+            <TileHeight>256</TileHeight>
+            <MatrixWidth>220820.0</MatrixWidth>
+            <MatrixHeight>45854.0</MatrixHeight>
+        </TileMatrix><TileMatrix>
+            <ows:Identifier>19</ows:Identifier>
+            <ScaleDenominator>1127.233881266917</ScaleDenominator>
+            <TopLeftCorner>-180 90</TopLeftCorner>
+            <TileWidth>256</TileWidth>
+            <TileHeight>256</TileHeight>
+            <MatrixWidth>441640.0</MatrixWidth>
+            <MatrixHeight>91708.0</MatrixHeight>
+        </TileMatrix><TileMatrix>
+            <ows:Identifier>20</ows:Identifier>
+            <ScaleDenominator>563.6169406334585</ScaleDenominator>
+            <TopLeftCorner>-180 90</TopLeftCorner>
+            <TileWidth>256</TileWidth>
+            <TileHeight>256</TileHeight>
+            <MatrixWidth>883280.0</MatrixWidth>
+            <MatrixHeight>183416.0</MatrixHeight>
+        </TileMatrix></TileMatrixSet>
+    </Contents>
+    <ServiceMetadataURL xlink:href="http://tmap.linhai.gov.cn/services/wmts/lhemap"/>
+</Capabilities>
