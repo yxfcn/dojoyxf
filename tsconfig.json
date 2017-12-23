@@ -11,6 +11,7 @@
     "./src/js/yxf/*",
     "./src/widgets/*",
     "./src/js/TDT/*",
-    "./src/js/TDT/LH/*"
+    "./src/js/TDT/LH/*",
+    "./src/js/yxf/layout/*"
   ]
 }

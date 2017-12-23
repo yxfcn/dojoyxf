@@ -56,10 +56,10 @@ var layerInfo = new WMTSLayerInfo({
     "tileInfo": tileInfo,
     "fullExtent": bounds,
     "initialExtent": bounds,
-    "identifier": "zjemap",
+    "identifier": "img",
+"format":"",
+    "tileMatrixSet": "c",
 
-    "tileMatrixSet": "esritilematirx",
-    "format": "png",
     "style": "default"
 });
 var resourceInfo = {
@@ -70,10 +70,13 @@ var resourceInfo = {
 var options = {
     "serviceMode": "KVP",
     "resourceInfo": resourceInfo,
-    "layerInfo": layerInfo
+    "layerInfo": layerInfo,
+    "customLayerParameters" : {
+        "format": "tiles"
+    }
 };
 //浙江电子地图
-wmtsLayer = new WMTSLayer("http://ditu.zj.cn/services/wmts/zjemap", options);
+wmtsLayer = new WMTSLayer("http://t0.tianditu.com/img_c/wmts", options);
 
 
 
@@ -87,6 +90,3 @@ map.addLayer(wmtsLayer);
 
 
 var mapNode=dom.byId("map");
-on(mapNode,"click",function(evt){
-    alert("x:"+evt.mapPoint.x+",y:"+evt.mapPoint.y);
-});

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <title>天地图测试</title>
+    <link rel="stylesheet" href="http://localhost:8080/arcgis_js_api/3.22/esri/css/esri.css">
+    <style>
+        html, body, #map { height: 100%; width: 100%; margin: 0; padding: 0; }
+    </style>
+    <script>
+        window.dojoConfig={
+            deps:["tdt/ChinaTDT"],
+            packages:[
+                {
+                    name:"tdt",
+                    location:window.location.origin+"/dojoyxf/src/js/TDT"
+                }
+            ],
+            async:true
+        }
+    </script>
+    <script src="http://localhost:8080/arcgis_js_api/3.22/init.js"></script>
+</head>
+<body>
+<div id="map"></div>
+</body>
+</html>

@@ -1,27 +1,22 @@
-define(["require", "exports", "dojo/parser", "esri/geometry/Extent", "esri/layers/TileInfo", "esri/SpatialReference", "esri/layers/WMTSLayerInfo", "esri/layers/WMTSLayer", "esri/map"], function (require, exports, parser, Extent, TileInfo, SpatialReference, WMTSLayerInfo, WMTSLayer, Map) {
+define(["require", "exports", "dojo/parser", "esri/geometry/Extent", "esri/layers/TileInfo", "esri/SpatialReference", "esri/layers/WMTSLayerInfo", "esri/layers/WMTSLayer", "esri/map", "dojo/on", "dojo/dom"], function (require, exports, parser, Extent, TileInfo, SpatialReference, WMTSLayerInfo, WMTSLayer, Map, on, dom) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     console.log("Come in");
     parser.parse();
     var map, wmtsLayer, TDTSR;
     TDTSR = new SpatialReference({ wkid: 4490 });
-    var bounds = new Extent({
-        xmax: 180,
-        ymax: 90,
-        xmin: -180,
-        ymin: -90
-    });
+    var bounds = new Extent(117.599014, 26.827559, 123.45579, 31.564402, TDTSR);
     var tileInfo = new TileInfo({
-        dpi: 90.71428571428571,
-        compressionQuality: 0,
-        spatialReference: TDTSR,
-        rows: 256,
-        cols: 256,
-        origin: {
-            x: -180,
-            y: 90
+        "dpi": 96,
+        "compressionQuality": 0,
+        "spatialReference": TDTSR,
+        "rows": 256,
+        "cols": 256,
+        "origin": {
+            "x": -180,
+            "y": 90
         },
-        lods: [
+        "lods": [
             { "level": 0, "resolution": 1.40625, "scale": 590995197.14166909755553014475 },
             { "level": 1, "resolution": 0.703125, "scale": 295497598.57083454877776507238 },
             { "level": 2, "resolution": 0.3515625, "scale": 147748799.28541727438888253619 },
@@ -47,27 +42,33 @@ define(["require", "exports", "dojo/parser", "esri/geometry/Extent", "esri/layer
     });
     var tileExtent = new Extent(-180.0, -90.0, 180.0, 90.0, TDTSR);
     var layerInfo = new WMTSLayerInfo({
-        tileInfo: tileInfo,
-        fullExtent: tileExtent,
-        initialExtent: tileExtent,
-        identifier: "lhemap",
-        tileMatrixSet: "esritilematirx",
-        format: "image/png",
-        style: "default"
+        "tileInfo": tileInfo,
+        "fullExtent": bounds,
+        "initialExtent": bounds,
+        "identifier": "zjemap",
+        "tileMatrixSet": "esritilematirx",
+        "format": "png",
+        "style": "default"
     });
     var resourceInfo = {
-        version: "1.0.0",
-        layerInfos: [layerInfo]
+        "version": "1.0.0",
+        "layerInfos": [layerInfo]
     };
     var options = {
-        serviceMode: "KVP",
-        resourceInfo: resourceInfo,
-        layerInfo: layerInfo
+        "serviceMode": "KVP",
+        "resourceInfo": resourceInfo,
+        "layerInfo": layerInfo
     };
+    //浙江电子地图
     wmtsLayer = new WMTSLayer("http://ditu.zj.cn/services/wmts/zjemap", options);
     map = new Map("map", {
-        extent: bounds
+        extent: bounds,
+        zoom: 12
     });
     map.addLayer(wmtsLayer);
+    var mapNode = dom.byId("map");
+    on(mapNode, "click", function (evt) {
+        alert("x:" + evt.mapPoint.x + ",y:" + evt.mapPoint.y);
+    });
 });
 //# sourceMappingURL=LHTDT.js.map

@@ -3,17 +3,19 @@ import parser=require("dojo/parser");
 import Extent=require("esri/geometry/Extent");
 import TileInfo = require("esri/layers/TileInfo");
 import SpatialReference = require("esri/SpatialReference");
-import WMTSLayerInfo = require("esri/layers/WMTSLayerInfo");
-import WMTSLayer = require("esri/layers/WMTSLayer");
+import WebTiledLayer = require("esri/layers/WebTiledLayer");
+//import WMTSLayer = require("esri/layers/WMTSLayer");
 import Map = require("esri/map");
 import on=require("dojo/on");
 import dom=require("dojo/dom");
+
+
 console.log("Come in");
 parser.parse();
-var map, wmtsLayer,TDTSR;
+var map, tdtImg,TDTSR;
 TDTSR=new SpatialReference({wkid:4490});
 var bounds=new Extent(117.599014,26.827559,123.45579,31.564402,TDTSR);
-
+var fullExtent=new Extent(-180,-90,180,90,TDTSR);
 var tileInfo=new TileInfo({
     "dpi":96,
 
@@ -52,29 +54,23 @@ var tileInfo=new TileInfo({
 });
 var tileExtent = new Extent(-180.0, -90.0, 180.0, 90.0, TDTSR);
 
-var layerInfo = new WMTSLayerInfo({
-    "tileInfo": tileInfo,
-    "fullExtent": bounds,
-    "initialExtent": bounds,
-    "identifier": "zjemap",
+var urlPattern="http://t${subDomain}.tianditu.com/img_c/wmts?SERVICE=WMTS&VERSION=1.0.0&REQUEST=GetTile&LAYER=img&STYLE="
+    +"default&FORMAT=&TILEMATRIXSET=c&TILEMATRIX=${level}&TILEROW=${row}&TILECOL=${col}&format=tiles";
+var cvaPattern="http://t${subDomain}.tianditu.com/cva_c/wmts?SERVICE=WMTS&VERSION=1.0.0&REQUEST=GetTile&LAYER=cva&STYLE="
+    +"default&FORMAT=&TILEMATRIXSET=c&TILEMATRIX=${level}&TILEROW=${row}&TILECOL=${col}&format=tiles";
+var ciaPattern="http://t${subDomain}.tianditu.cn/DataServer?T=cia_c&X=${col}&Y=${row}&L=${level}"
+var options={
+    "fullExtent":fullExtent,
+    "initialExtent":fullExtent,
+    "subDomains":[0,1,2,3,4,5,6,7],
+    "tileInfo":tileInfo
+}
 
-    "tileMatrixSet": "esritilematirx",
-    "format": "png",
-    "style": "default"
-});
-var resourceInfo = {
-    "version": "1.0.0",
-    "layerInfos": [layerInfo]
-};
 
-var options = {
-    "serviceMode": "KVP",
-    "resourceInfo": resourceInfo,
-    "layerInfo": layerInfo
-};
 //浙江电子地图
-wmtsLayer = new WMTSLayer("http://ditu.zj.cn/services/wmts/zjemap", options);
-
+tdtImg = new WebTiledLayer(urlPattern,options);
+var tdt_cva=new WebTiledLayer(cvaPattern,options);
+var tdt_cia=new WebTiledLayer(ciaPattern,options);
 
 
 
@@ -82,11 +78,11 @@ map=new Map("map",{
     extent:bounds,
     zoom:12
 });
+map.addLayer(tdtImg);
+/*map.addLayer(tdt_cva);*/
+map.addLayer(tdt_cia);
 
-map.addLayer(wmtsLayer);
+
 
 
 var mapNode=dom.byId("map");
-on(mapNode,"click",function(evt){
-    alert("x:"+evt.mapPoint.x+",y:"+evt.mapPoint.y);
-});
