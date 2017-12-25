@@ -271,7 +271,7 @@ declare namespace dojo {
 		 * or explicit 'places' parameter.  The value [true,false] makes the fractional portion optional.
 		 * By default for currencies, it the fractional portion is optional.
 		 */
-		factional?: boolean | [boolean, boolean];
+		fractional?: boolean | [boolean, boolean];
 	}
 
 	interface Currency {
@@ -407,7 +407,7 @@ declare namespace dojo {
 		async: number| boolean;
 		has: dojo.Has;
 		isXdurl(url: string): boolean;
-		initSyncLoader(dojoRequirePlugin_: any, checkDojoRequirePlugin_: any, transformToAmd_: any): GenericObject;
+		initSyncLoader(dojoRequirePlugin: any, checkDojoRequirePlugin: any, transformToAmd: any): GenericObject;
 		getXhr(): XMLHttpRequest | ActiveXObject;
 		getText(url: string, async?: boolean, onLoad?: (responseText: string, async?: boolean) => void): string;
 		eval(text: string, hint?: string): any;
@@ -1252,7 +1252,7 @@ declare namespace dojo {
 		/**
 		 * If false, show no decimal places, overriding places and pattern settings.
 		 */
-		factional?: boolean | [ boolean, boolean ];
+		fractional?: boolean | [ boolean, boolean ];
 	}
 
 	interface NumberFormatAbsoluteOptions {
@@ -1341,7 +1341,7 @@ declare namespace dojo {
 		 * Whether to include the fractional portion, where the number of decimal places are implied by pattern
 		 * or explicit 'places' parameter.  The value [true,false] makes the fractional portion optional.
 		 */
-		factional?: boolean | [boolean, boolean];
+		fractional?: boolean | [boolean, boolean];
 	}
 
 	interface RealNumberRegexpFlags {
@@ -1363,7 +1363,7 @@ declare namespace dojo {
 		 * Whether decimal places are used.  Can be true, false, or [true,
 		 * false].  Default is [true, false] which means optional.
 		 */
-		factional?: boolean | [boolean, boolean];
+		fractional?: boolean | [boolean, boolean];
 
 		/**
 		 * Express in exponential notation.  Can be true, false, or [true,
@@ -1490,7 +1490,7 @@ declare namespace dojo {
 		 * returned signal object has pause() and resume() functions. Calling the
 		 * pause() method will cause the listener to not be called for future events.
 		 */
-		pausable(target: Element | GenericObject, type: string | ExtensionEvent, listener: EventListener | Function, dontFix?: boolean): Handle;
+		pausable(target: Element | GenericObject, type: string | ExtensionEvent, listener: EventListener | Function, dontFix?: boolean): PauseHandle;
 
 		/**
 		 * This function acts the same as on(), but will only call the listener once. The

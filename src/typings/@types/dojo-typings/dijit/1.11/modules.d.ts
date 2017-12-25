@@ -102,16 +102,40 @@ declare module 'dijit/DropDownMenu' {
 	export = DropDownMenu;
 }
 
+declare module 'dijit/Fieldset' {
+	type Fieldset = dijit.Fieldset;
+	const Fieldset: dijit.FieldsetConstructor;
+	export = Fieldset;
+}
+
 declare module 'dijit/Menu' {
 	type Menu = dijit.Menu;
 	const Menu: dijit.MenuConstructor;
 	export = Menu;
 }
 
+declare module 'dijit/MenuBar' {
+	type MenuBar = dijit.MenuBar;
+	const MenuBar: dijit.MenuBarConstructor;
+	export = MenuBar;
+}
+
+declare module 'dijit/MenuBarItem' {
+	type MenuBarItem = dijit.MenuBarItem;
+	const MenuBarItem: dijit.MenuBarItemConstructor;
+	export = MenuBarItem;
+}
+
 declare module 'dijit/MenuItem' {
 	type MenuItem = dijit.MenuItem;
 	const MenuItem: dijit.MenuItemConstructor;
 	export = MenuItem;
+}
+
+declare module 'dijit/MenuSeparator' {
+	type MenuSeparator = dijit.MenuSeparator;
+	const MenuSeparator: dijit.MenuSeparatorConstructor;
+	export = MenuSeparator;
 }
 
 declare module 'dijit/place' {
@@ -122,6 +146,12 @@ declare module 'dijit/place' {
 declare module 'dijit/popup' {
 	const popup: dijit.PopupManager;
 	export = popup;
+}
+
+declare module 'dijit/PopupMenuBarItem' {
+	type PopupMenuBarItem = dijit.PopupMenuBarItem;
+	const PopupMenuBarItem: dijit.PopupMenuBarItemConstructor;
+	export = PopupMenuBarItem;
 }
 
 declare module 'dijit/PopupMenuItem' {

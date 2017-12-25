@@ -295,6 +295,11 @@ declare module 'dojo/dnd/Manager' {
 	export = Manager;
 }
 
+declare module 'dojo/dnd/move' {
+	const Move: dojo.dnd.Move;
+	export = Move;
+}
+
 declare module 'dojo/dnd/Moveable' {
 	type Moveable = dojo.dnd.Moveable;
 	const Moveable: dojo.dnd.Moveable;
@@ -502,8 +507,8 @@ declare module 'dojo/NodeList' {
 }
 
 declare module 'dojo/number' {
-	const number: dojo.Number;
-	export = number;
+	const value: dojo.Number;
+	export = value;
 }
 
 declare module 'dojo/on' {
@@ -769,8 +774,8 @@ declare module 'dojo/store/Observable' {
 }
 
 declare module 'dojo/string' {
-	const string: dojo.String;
-	export = string;
+	const value: dojo.String;
+	export = value;
 }
 
 declare module 'dojo/text' {

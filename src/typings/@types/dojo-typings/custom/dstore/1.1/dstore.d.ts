@@ -78,7 +78,7 @@ declare module 'dstore/legacy/DstoreAdapter' {
 	import Store = require('dstore/Store');
 
 	interface DstoreAdapter<T> {
-		constructor(collection: dstore.Collection<T>);
+		constructor(collection: dstore.Collection<T>): DstoreAdapter<T>;
 		get(id: any): any;
 		put(object: T, options?: {}): any;
 		remove(id: any): any;
@@ -144,6 +144,62 @@ declare module 'dstore/Trackable' {
 	const Trackable: Trackable.Constructor;
 
 	export = Trackable;
+}
+
+declare module 'dstore/Tree' {
+	interface Tree<T> {
+		mayHaveChildren(object: T): boolean;
+		getRootCollection(): dstore.Collection<T>;
+		getChildren(object: T): dstore.Collection<T>;
+	}
+
+	module Tree {
+		export interface Constructor extends dojo._base.DeclareConstructor<Tree<any>> {
+			new <T>(...args: any[]): Tree<T>;
+		}
+	}
+
+	const Tree: Tree.Constructor;
+
+	export = Tree;
+}
+
+declare module 'dstore/Promised' {
+	import * as Promise from 'dojo/promise/Promise';
+
+	interface Promised<T> {
+		get(id: any): Promise<T>;
+		put(object: T, options?: {}): Promise<T>;
+		add(object: T, options?: {}): Promise<T>;
+		remove(id: any): Promise<boolean>;
+		fetch(): dstore.FetchPromise<T>;
+		fetchRange(args: { start?: number; end?: number; }): dstore.FetchPromise<T>;
+	}
+
+	module Promised {
+		export interface Constructor extends dojo._base.DeclareConstructor<Promised<any>> {
+			new <T>(...args: any[]): Promised<T>;
+		}
+	}
+
+	const Promised: Promised.Constructor;
+
+	export = Promised;
+}
+
+declare module 'dstore/SimpleQuery' {
+	interface SimpleQuery<T> {
+	}
+
+	module SimpleQuery {
+		export interface Constructor extends dojo._base.DeclareConstructor<SimpleQuery<any>> {
+			new <T>(...args: any[]): SimpleQuery<T>;
+		}
+	}
+
+	const SimpleQuery: SimpleQuery.Constructor;
+
+	export = SimpleQuery;
 }
 
 declare module 'dstore/Request' {

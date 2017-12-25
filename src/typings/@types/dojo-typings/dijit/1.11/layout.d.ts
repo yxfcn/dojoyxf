@@ -25,7 +25,7 @@ declare namespace dijit {
 			 * ####Change size mode:
 			 *
 			 * When changeSize is specified, changes the marginBox of this widget
-			 * and forces it to re-Layout its contents accordingly.
+			 * and forces it to re-layout its contents accordingly.
 			 * changeSize may specify height, width, or both.
 			 *
 			 * If resultSize is specified it indicates the size the widget will
@@ -35,7 +35,7 @@ declare namespace dijit {
 			 *
 			 * When changeSize is null, indicates that the caller has already changed
 			 * the size of the widget, or perhaps it changed because the browser
-			 * window was resized. Tells widget to re-Layout its contents accordingly.
+			 * window was resized. Tells widget to re-layout its contents accordingly.
 			 *
 			 * If resultSize is also specified it indicates the size the widget has
 			 * become.
@@ -44,7 +44,7 @@ declare namespace dijit {
 			 *
 			 * 1. Sets this._borderBox and this._contentBox to the new size of
 			 * 	the widget. Queries the current domNode size if necessary.
-			 * 2. Calls Layout() to resize contents (and maybe adjust child widgets).
+			 * 2. Calls layout() to resize contents (and maybe adjust child widgets).
 			 */
 			resize(changeSize?: dojo.DomGeometryBox, resultSize?: dojo.DomGeometryWidthHeight): void;
 

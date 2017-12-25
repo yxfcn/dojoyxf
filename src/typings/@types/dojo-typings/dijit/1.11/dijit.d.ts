@@ -518,8 +518,8 @@ declare namespace dijit {
 
 		/**
 		 * Called when this widget becomes the selected pane in a
-		 * `dijit/Layout/TabContainer`, `dijit/Layout/StackContainer`,
-		 * `dijit/Layout/AccordionContainer`, etc.
+		 * `dijit/layout/TabContainer`, `dijit/layout/StackContainer`,
+		 * `dijit/layout/AccordionContainer`, etc.
 		 *
 		 * Also called to indicate display of a `dijit.Dialog`, `dijit.TooltipDialog`, or `dijit.TitlePane`.
 		 */
@@ -527,8 +527,8 @@ declare namespace dijit {
 
 		/**
 		 * Called when another widget becomes the selected pane in a
-		 * `dijit/Layout/TabContainer`, `dijit/Layout/StackContainer`,
-		 * `dijit/Layout/AccordionContainer`, etc.
+		 * `dijit/layout/TabContainer`, `dijit/layout/StackContainer`,
+		 * `dijit/layout/AccordionContainer`, etc.
 		 *
 		 * Also called to indicate hide of a `dijit.Dialog`, `dijit.TooltipDialog`, or `dijit.TitlePane`.
 		 */
@@ -1441,7 +1441,7 @@ declare namespace dijit {
 		/**
 		 * Open the popup to the side of/underneath the current menu item, and optionally focus first item
 		 */
-		_openItemPopup(from_item: MenuItem, focus: boolean): void;
+		_openItemPopup(fromItem: MenuItem, focus: boolean): void;
 
 		/**
 		 * Callback when this menu is opened.
@@ -1632,6 +1632,18 @@ declare namespace dijit {
 
 	interface DropDownMenuConstructor extends _WidgetBaseConstructor<DropDownMenu> { }
 
+	/* dijit/Fieldset */
+
+	/**
+	 * An accessible fieldset that can be expanded or collapsed via
+	 * its legend.  Fieldset extends `dijit.TitlePane`.
+	 */
+	interface Fieldset extends TitlePane {
+		open: boolean;
+	}
+
+	interface FieldsetConstructor extends _WidgetBaseConstructor<Fieldset> { }
+
 	/* dijit/Menu */
 
 	/**
@@ -1681,6 +1693,29 @@ declare namespace dijit {
 	}
 
 	interface MenuConstructor extends _WidgetBaseConstructor<Menu> { }
+
+	/* dijit/MenuBar */
+	interface MenuBar extends _MenuBase {
+		baseClass: 'dijitMenuBar';
+		popupDelay: number;
+		_isMenuBar: true;
+		_orient: string[];
+		_moveToPopup(evt: Event): void;
+		focusChild(item: _WidgetBase): void;
+		_onChildDeselect(item: _WidgetBase): void;
+		_onLeftArrow(): void;
+		_onRightArrow(): void;
+		_onDownArrow(): void;
+		_onUpArrow(): void;
+		onItemClick(item: _WidgetBase, evt: Event): void;
+	}
+
+	interface MenuBarConstructor extends _WidgetBaseConstructor<MenuBar> { }
+
+	/* dijit/MenuBarItem */
+	interface MenuBarItem extends MenuItem { }
+
+	interface MenuBarItemConstructor extends _WidgetBaseConstructor<MenuBarItem> { }
 
 	/* dijit/MenuItem */
 	interface MenuItem extends _Widget, _TemplatedMixin, _Contained, _CssStateMixin {
@@ -1743,6 +1778,11 @@ declare namespace dijit {
 	}
 
 	interface MenuItemConstructor extends _WidgetBaseConstructor<MenuItem> { }
+
+	/* dijit/MenuSeparator */
+	interface MenuSeparator extends _WidgetBase, _TemplatedMixin, _Contained { }
+
+	interface MenuSeparatorConstructor extends _WidgetBaseConstructor<MenuSeparator> { }
 
 	/* dijit/place */
 
@@ -1925,6 +1965,12 @@ declare namespace dijit {
 		 */
 		close(popup?: _WidgetBase): void;
 	}
+
+	/* dijit/PopupMenuBarItem */
+
+	interface PopupMenuBarItem extends PopupMenuItem { }
+
+	interface PopupMenuBarItemConstructor extends _WidgetBaseConstructor<PopupMenuBarItem> { }
 
 	/** dijit/PopupMenuItem */
 

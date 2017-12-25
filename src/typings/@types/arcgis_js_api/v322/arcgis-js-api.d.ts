@@ -1,4 +1,4 @@
-// Type definitions for ArcGIS API for JavaScript 3.22
+// Type definitions for ArcGIS API for JavaScript 3.23
 // Project: https://developers.arcgis.com/javascript/3/
 // Definitions by: Esri <https://github.com/Esri>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -478,6 +478,10 @@ declare module "esri" {
     zoomOptions?: any;
   }
   export interface ColorPickerOptions {
+    /** Indicates whether the widget displays collapsed. */
+    collapsed?: boolean;
+    /** Indicates whether the widget can be collapsed. */
+    collapsible?: boolean;
     /** The selected color. */
     color: Color;
     /** The row size of the palette. */
@@ -1240,13 +1244,13 @@ declare module "esri" {
     angularUnit?: string;
     /** The area unit in which areas of polygons will be calculated. */
     areaUnit?: string;
-    /** Defines whether to show the widget result in a popup or in the widget's result area when the widget has 'toolbar' Layout. */
+    /** Defines whether to show the widget result in a popup or in the widget's result area when the widget has 'toolbar' layout. */
     displayMeasureResultInPopup?: boolean;
     /** Symbol to be used when drawing a polygon or extent. */
     fillSymbol?: SimpleFillSymbol;
     /** Image service layer with which the toolbar is associated. */
     layer: ArcGISImageServiceLayer;
-    /** Defines the Layout of the widget. */
+    /** Defines the layout of the widget. */
     layout?: string;
     /** The linear unit in which height, length, or perimeters will be calculated. */
     linearUnit?: string;
@@ -1830,8 +1834,10 @@ declare module "esri" {
     whereFields: any;
   }
   export interface QueryTaskOptions {
-    /** Specify the geodatabase version to display. */
+    /** The geodatabase version to display. */
     gdbVersion?: string;
+    /** The dynamic layer or table source. */
+    source?: LayerSource;
   }
   export interface RasterLayerOptions {
     /** Sets the layer's draw mode. */
@@ -3852,6 +3858,10 @@ declare module "esri/dijit/ColorPicker" {
 
   /** A widget to assist choosing a color from a color palette. */
   class ColorPicker {
+    /** Indicates whether the widget displays collapsed. */
+    collapsed: boolean;
+    /** Indicates whether the widget is collapsible. */
+    collapsible: boolean;
     /** The selected color. */
     color: Color;
     /** The set of available color options. */
@@ -5355,7 +5365,7 @@ declare module "esri/dijit/PopupTemplate" {
   import esri = require("esri");
   import InfoTemplate = require("esri/InfoTemplate");
 
-  /** The PopupTemplate class extends esri/InfoTemplate and provides support for defining a Layout. */
+  /** The PopupTemplate class extends esri/InfoTemplate and provides support for defining a layout. */
   class PopupTemplate extends InfoTemplate {
     /** The popup definition defined as a JavaScript object. */
     info: any;
@@ -5373,7 +5383,7 @@ declare module "esri/dijit/Print" {
   import esri = require("esri");
   import PrintTemplate = require("esri/tasks/PrintTemplate");
 
-  /** The Print widget simplifies the process of printing a map using a default or user-defined Layout. */
+  /** The Print widget simplifies the process of printing a map using a default or user-defined layout. */
   class Print {
     /**
      * Creates a new Print widget.
@@ -8158,9 +8168,9 @@ declare module "esri/geometry/geometryEngine" {
      */
     nearestVertices(geometry: Geometry, inputPoint: Point, searchRadius: number, maxVertexCountToReturn: number): any[];
     /**
-     * Creates offset version of the input geometry.
+     * The offset operation creates a geometry that is a constant planar distance from an input polyline or polygon.
      * @param geometry The geometries to offset.
-     * @param offsetDistance The offset distance for the Geometries.
+     * @param offsetDistance The planar distance to offset from the input geometry.
      * @param offsetUnit Measurement unit for the offset.
      * @param joinType The join type.
      * @param bevelRatio Applicable to MITER, bevelRatio is multiplied by the offset distance and the result determines how far a mitered offset intersection can be located before it is beveled.
@@ -8401,9 +8411,9 @@ declare module "esri/geometry/geometryEngineAsync" {
      */
     nearestVertices(geometry: Geometry, inputPoint: Point, searchRadius: number, maxVertexCountToReturn: number): any;
     /**
-     * Creates offset version of the input geometry.
+     * The offset operation creates a geometry that is a constant planar distance from an input polyline or polygon.
      * @param geometry The geometries to offset.
-     * @param offsetDistance The offset distance for the Geometries.
+     * @param offsetDistance The planar distance to offset from the input geometry.
      * @param offsetUnit Measurement unit for the offset.
      * @param joinType The join type.
      * @param bevelRatio Applicable to MITER, bevelRatio is multiplied by the offset distance and the result determines how far a mitered offset intersection can be located before it is beveled.
@@ -8691,11 +8701,8 @@ declare module "esri/graphic" {
     clone(): Graphic;
     /** Draws the graphic. */
     draw(): Graphic;
-    /**
-     * Returns the graphics summarized by the given aggregate graphic in a clustering or feature reduction visualization.
-     * @param aggregateGraphic A graphic representing the aggregation (or reduction) of several individual graphics in a layer.
-     */
-    getChildGraphics(aggregateGraphic: Graphic): Graphic[];
+    /** Returns the graphics summarized by an aggregate graphic in a clustering or feature reduction visualization. */
+    getChildGraphics(): Graphic[];
     /** Returns the content string based on attributes and infoTemplate values. */
     getContent(): string;
     /** Returns the dojo/gfx/shape.Shape of the Esri graphic. */
@@ -13588,6 +13595,20 @@ declare module "esri/request" {
   export = request;
 }
 
+declare module "esri/support/expressionUtils" {
+  /** A utility module that allows you to enable geometry operations referenced inside Arcade expressions. */
+  var expressionUtils: {
+    /** Loads all geometry operations for use in any Arcade expression within the given application. */
+    enableGeometryOperations(): any;
+    /**
+     * Indicates if the given Arcade expression contains one or more geometry operations.
+     * @param expression The Arcade expression to evaluate for the presence of one or more geometry operations.
+     */
+    hasGeometryOperations(expression: string): boolean;
+  };
+  export = expressionUtils;
+}
+
 declare module "esri/symbols/CartographicLineSymbol" {
   import SimpleLineSymbol = require("esri/symbols/SimpleLineSymbol");
   import Color = require("esri/Color");
@@ -13718,7 +13739,7 @@ declare module "esri/symbols/Font" {
     size: number;
     /** Text style. */
     style: string;
-    /** Text variant. */
+    /** Text variant (deprecated). */
     variant: string;
     /** Text weight. */
     weight: string;
@@ -13759,7 +13780,7 @@ declare module "esri/symbols/Font" {
      */
     setStyle(style: string): Font;
     /**
-     * Sets the font variant.
+     * Sets the font variant (deprecated).
      * @param variant Font variant.
      */
     setVariant(variant: string): Font;
@@ -14018,6 +14039,8 @@ declare module "esri/symbols/SimpleLineSymbol" {
     static STYLE_SHORTDOT: any;
     /** The line is solid. */
     static STYLE_SOLID: any;
+    /** Indicates marker symbols present at the beginning and/or end of a SimpleLineSymbol. */
+    marker: any;
     /** The line style. */
     style: string;
     /** Creates a new empty SimpleLineSymbol object. */
@@ -14034,6 +14057,11 @@ declare module "esri/symbols/SimpleLineSymbol" {
      * @param json JSON object representing the SimpleLineSymbol.
      */
     constructor(json: Object);
+    /**
+     * Sets marker symbols at the beginning and/or end of a SimpleLineSymbol.
+     * @param options The options defining the marker style and placement.
+     */
+    setMarker(options: any): void;
     /**
      * Sets the line symbol style.
      * @param style Line style.
@@ -15038,7 +15066,7 @@ declare module "esri/tasks/GeometryService" {
      */
     lengths(lengthsParameter: LengthsParameters, callback?: Function, errback?: Function): any;
     /**
-     * Constructs the offset of the input geometries.
+     * Constructs the offset of the input geometries based on a planar distance.
      * @param params Set the geometries to offset, distance and units.
      * @param callback The function to call when the method has completed.
      * @param errback An error object is returned if an error occurs during task execution.
@@ -15680,7 +15708,7 @@ declare module "esri/tasks/OffsetParameters" {
     bevelRatio: number;
     /** The array of geometries to be offset. */
     geometries: Geometry[];
-    /** Specifies the distance for constructing an offset based on the input geometries. */
+    /** Specifies the planar distance for constructing an offset based on the input geometries. */
     offsetDistance: number;
     /** Options that determine how the ends intersect. */
     offsetHow: string;
@@ -15718,7 +15746,7 @@ declare module "esri/tasks/PrintParameters" {
     map: Map;
     /** Specify the output spatial reference for the printout. */
     outSpatialReference: SpatialReference;
-    /** Defines the Layout template used for  the printed map. */
+    /** Defines the layout template used for  the printed map. */
     template: PrintTemplate;
     /** Creates a new PrintParameters object. */
     constructor();
@@ -15758,7 +15786,7 @@ declare module "esri/tasks/PrintTask" {
 }
 
 declare module "esri/tasks/PrintTemplate" {
-  /** Define the Layout template options used by the PrintTask and Print widget to generate the print page. */
+  /** Define the layout template options used by the PrintTask and Print widget to generate the print page. */
   class PrintTemplate {
     /** Define the map width, height and dpi. */
     exportOptions: any;
@@ -15766,9 +15794,9 @@ declare module "esri/tasks/PrintTemplate" {
     format: string;
     /** The text that appears on the Print widget's print button. */
     label: string;
-    /** The Layout used for the print output. */
+    /** The layout used for the print output. */
     layout: string;
-    /** Define the Layout elements. */
+    /** Define the layout elements. */
     layoutOptions: any;
     /** The optional map scale of the printed map. */
     outScale: number;
@@ -15806,12 +15834,17 @@ declare module "esri/tasks/ProjectParameters" {
 
 declare module "esri/tasks/QueryTask" {
   import esri = require("esri");
+  import LayerSource = require("esri/layers/LayerSource");
   import Query = require("esri/tasks/query");
   import RelationshipQuery = require("esri/tasks/RelationshipQuery");
   import FeatureSet = require("esri/tasks/FeatureSet");
 
   /** Executes a query operation on a layer resource of a map service exposed by the ArcGIS Server REST API. */
   class QueryTask {
+    /** The geodatabase version to display. */
+    gdbVersion: string;
+    /** The dynamic layer or table source. */
+    source: LayerSource;
     /** URL to the ArcGIS Server REST resource that represents a map service layer. */
     url: string;
     /**
