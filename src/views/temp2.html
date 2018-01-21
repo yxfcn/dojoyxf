@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .m2016mc-maptype-selection-c a {
+            text-align: center;
+            cursor: pointer
+        }
+
+        .m2016mc-maptype-selection-c .maptype {
+            position: relative;
+            float: left;
+            padding-top: 35px;
+            background: #fff url(/static/dist/45b92547b24cbb49c37e4b7359ccfc01.png) no-repeat center 0;
+            font-size: 12px;
+            color: #333;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .5), 0 -1px 0 rgba(0, 0, 0, .02)
+        }
+
+        .m2016mc-maptype-selection-c .maptype-img,
+        .m2016mc-maptype-selection-c .maptype-img60,
+        .m2016mc-maptype-selection-c .maptype-img70,
+        .m2016mc-maptype-selection-c .maptype-img2000 {
+            background-position: center -50px
+        }
+
+        .m2016mc-maptype-selection-c .maptype-dixing {
+            background-position: center -100px
+        }
+
+        .m2016mc-maptype-selection-c .maptype .maptype-label {
+            background-color: #fff;
+            font-size: 13px;
+            width: auto;
+            min-width: 57px;
+            padding: 2px .5em
+        }
+
+        .m2016mc-maptype-selection-c .maptype-selected .maptype-label {
+            display: none
+        }
+
+        .m2016mc-maptype-selection-c .maptype:hover .maptype-label {
+            background-color: #5bb5e9;
+            color: #fff;
+            opacity: 1
+        }
+
+        .m2016mc-maptype-selection-c .list-model-trigger {
+            position: absolute;
+            display: none;
+            bottom: 100%;
+            background-color: #fff;
+            overflow: hidden;
+            width: 100%;
+            padding: 0;
+            text-align: center
+        }
+
+        .m2016mc-maptype-selection-c:hover .list-model-trigger {
+            display: block
+        }
+
+        .m2016mc-maptype-selection-c .other-maptype {
+            display: none
+        }
+
+        .m2016mc-maptype-selection-c .maptype-selected {
+            position: absolute;
+            display: block;
+            right: 0;
+            top: 105%;
+            width: 0;
+            height: 0;
+            overflow: visible;
+            border-width: 0
+        }
+
+        .m2016mc-maptype-selection-c .maptype .anno-switcher {
+            position: absolute;
+            display: none;
+            opacity: .8;
+            padding: .1em 0;
+            background-color: #fff;
+            color: #666;
+            width: 70px;
+            text-indent: 11px;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 0, 0, .3), 0 -1px 0 rgba(0, 0, 0, .02)
+        }
+
+        .m2016mc-maptype-selection-c .maptype .anno-switcher:hover {
+            opacity: 1
+        }
+
+        .m2016mc-maptype-selection-c .maptype-selected .anno-switcher {
+            right: 0;
+            top: 3px
+        }
+
+        .m2016mc-maptype-selection-c .maptype .anno-switcher .anno-switcher-onoff {
+            position: absolute;
+            left: 3px;
+            top: 50%;
+            margin-top: -5px;
+            width: 8px;
+            height: 8px;
+            overflow: hidden;
+            border: 1px solid #5bb5e9
+        }
+
+        .m2016mc-maptype-selection-c .maptype .im-on .anno-switcher-onoff {
+            background-color: #5bb5e9
+        }
+
+        .m2016mc-maptype-selection-c .maptype-selected .anno-switcher {
+            display: block
+        }
+
+        .m2016mc-maptype-selection-c-list-model {
+            padding: 6px 6px 6px 1px;
+            -webkit-transition: background-color .3s ease-in-out;
+            transition: background-color .3s ease-in-out
+        }
+
+        .m2016mc-maptype-selection-c-list-model .list-model-trigger {
+            display: none!important
+        }
+
+        .m2016mc-maptype-selection-c-list-model .maptype {
+            position: relative;
+            width: 2px;
+            -webkit-transition: all .3s;
+            transition: all .3s;
+            white-space: nowrap;
+            overflow: hidden;
+            border: 1px solid #fff
+        }
+
+        .m2016mc-maptype-selection-c-list-model .maptype-selected .maptype-label {
+            display: block
+        }
+
+        .m2016mc-maptype-selection-c-list-model:hover .maptype-selected .maptype-label {
+            background-color: #3385ff;
+            color: #fff
+        }
+
+        .m2016mc-maptype-selection-c-list-model:hover {
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, .3), 0 -1px 0 rgba(0, 0, 0, .02)
+        }
+
+        .m2016mc-maptype-selection-c-list-model:hover .maptype {
+            width: auto;
+            opacity: 1!important;
+            filter: alpha(opacity=100)!important;
+            margin-left: 5px;
+            border: 1px solid #c4c7cc
+        }
+
+        .m2016mc-maptype-selection-c-list-model .maptype:hover {
+            width: auto;
+            min-width: 57px
+        }
+
+        .m2016mc-maptype-selection-c-list-model .list-model-trigger {
+            position: relative;
+            left: 0;
+            border-width: 0;
+            height: 100%;
+            width: 10px;
+            padding: .2em .5em;
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3FpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpmN2MwZTIxOS0zNjRhLTRhNGMtODQwNC1kZmQwMjlhYWQ2YjIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NjlBMTU4REIwNUQ5MTFFNThBOUNDOTJCNDg3MkRERkEiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NjlBMTU4REEwNUQ5MTFFNThBOUNDOTJCNDg3MkRERkEiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjM5NGExMzAwLWVhY2ItZjI0MC1iZDQ0LWMwMzU5NWJkZGRhMCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpmN2MwZTIxOS0zNjRhLTRhNGMtODQwNC1kZmQwMjlhYWQ2YjIiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5YIfc7AAAAt0lEQVR42pSRUQrCMAyGY9cXLyc4KgwET+DzQAQPMxAGSh8EYUfxMoIJZBBLsjWBH7aM7yv9t8k5fwCgx7zANwlzDQzfMTsnPGAugU8+OiQz3GKmwMtayR9MiyA+Ssm+Bi4FUjIUEhWmicpJJOkwI+aEaSzYEtC8haSxYO0KcrYMf/kZPAJ5507pZFFQFkbXOfAurXVgtT2x5MHvT02Qltq2JLESNiXRAZeScS7x5oClhP7O+SfAAP+HOev1yuJCAAAAAElFTkSuQmCC) no-repeat 50%;
+            text-indent: -99999px;
+            float: right
+        }
+
+        .m2016mc-maptype-selection-c-list-model .maptype-selected {
+            text-indent: 0;
+            width: auto;
+            min-width: 57px;
+            height: auto;
+            cursor: default;
+            opacity: 1!important;
+            -webkit-filter: none!important;
+            filter: none!important
+        }
+
+        .m2016mc-maptype-selection-c-list-model .maptype:hover .anno-switcher {
+            display: block
+        }
+
+        .m2016mc-maptype-selection-c-list-model .maptype-selected .anno-switcher {
+            display: none;
+            top: 0;
+            width: 100%;
+            font-size: 12px
+        }
+    </style>
+</head>
+
+<body>
+    <div id="m2016mc_map_type_selection_c" class="m2016mc-maptype-selection-c m2016mc-maptype-selection-c-list-model">
+        <a class="list-model-trigger">更多...</a>
+        <a class="maptype maptype-detail other-maptype map2016-disabled" maptype="detail" style="opacity: 0.1;">
+            <div class="maptype-label">详细图</div>
+        </a>
+        <a class="maptype maptype-d25 other-maptype map2016-disabled" maptype="d25" style="opacity: 0.2;">
+            <div class="maptype-label">2.5维地图</div>
+        </a>
+        <a class="maptype maptype-img60 other-maptype" maptype="img60" style="opacity: 0.3; display: inline;">
+            <div class="maptype-label">60年代影像</div>
+        </a>
+        <a class="maptype maptype-img70 other-maptype" maptype="img70" style="opacity: 0.4; display: inline;">
+            <div class="maptype-label">70年代影像</div>
+        </a>
+        <a class="maptype maptype-img2000 other-maptype" maptype="img2000" style="opacity: 0.5; display: inline;">
+            <div class="maptype-label">2000年左右影像</div>
+        </a>
+        <a class="maptype maptype-dixing other-maptype map2016-disabled" maptype="dixing" style="opacity: 0.6;">
+            <div class="maptype-label">地形</div>
+        </a>
+        <a class="maptype maptype-img" maptype="img" style="opacity: 0.7;">
+            <div class="maptype-label">影像</div>
+            <div class="anno-switcher anno-switcher-img im-on">
+                <span class="anno-switcher-onoff"></span>路网</div>
+        </a>
+        <a class="maptype maptype-emap maptype-selected" maptype="emap" style="opacity: 0.8;">
+            <div class="maptype-label">地图</div>
+            <div class="anno-switcher anno-switcher-emap im-on">
+                <span class="anno-switcher-onoff"></span>显示标注</div>
+        </a>
+    </div>
+    <!--  -->
+</body>
+
+</html>

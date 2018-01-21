@@ -1,74 +1,120 @@
-define(["require", "exports", "dojo/parser", "esri/geometry/Extent", "esri/layers/TileInfo", "esri/SpatialReference", "esri/layers/WMTSLayerInfo", "esri/layers/WMTSLayer", "esri/map", "dojo/on", "dojo/dom"], function (require, exports, parser, Extent, TileInfo, SpatialReference, WMTSLayerInfo, WMTSLayer, Map, on, dom) {
+define(["require", "exports", "dojo/parser", "esri/geometry/Extent", "esri/SpatialReference", "esri/map", "dojo/on", "dojo/dom", "esri/layers/ArcGISDynamicMapServiceLayer", "esri/layers/WebTiledLayer", "dojo/dom-construct", "esri/Color", "esri/dijit/Popup", "esri/InfoTemplate", "esri/symbols/SimpleFillSymbol", "esri/symbols/SimpleFillSymbol", "esri/layers/FeatureLayer", "esri/tasks/IdentifyTask", "esri/tasks/IdentifyParameters", "dojo/_base/array", "./TDTOptions"], function (require, exports, parser, Extent, SpatialReference, Map, on, dom, ArcGISDynamicMapServiceLayer, WebTiledLayer, domConstruct, Color, Popup, InfoTemplate, SimpleFillSymbol, SimpleLineSymbol, FeatureLayer, IdentifyTask, IdentifyParameters, Array, TDTOptions) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     console.log("Come in");
     parser.parse();
-    var map, wmtsLayer, TDTSR;
-    TDTSR = new SpatialReference({ wkid: 4490 });
-    var bounds = new Extent(117.599014, 26.827559, 123.45579, 31.564402, TDTSR);
-    var tileInfo = new TileInfo({
-        "dpi": 96,
-        "compressionQuality": 0,
-        "spatialReference": TDTSR,
-        "rows": 256,
-        "cols": 256,
-        "origin": {
-            "x": -180,
-            "y": 90
-        },
-        "lods": [
-            { "level": 0, "resolution": 1.40625, "scale": 590995197.14166909755553014475 },
-            { "level": 1, "resolution": 0.703125, "scale": 295497598.57083454877776507238 },
-            { "level": 2, "resolution": 0.3515625, "scale": 147748799.28541727438888253619 },
-            { "level": 3, "resolution": 0.17578125, "scale": 73874399.642708637194441268094 },
-            { "level": 4, "resolution": 0.087890625, "scale": 36937199.821354318597220634047 },
-            { "level": 5, "resolution": 0.0439453125, "scale": 18468599.910677159298610317023 },
-            { "level": 6, "resolution": 0.02197265625, "scale": 9234299.955338579649305158512 },
-            { "level": 7, "resolution": 0.010986328125, "scale": 4617149.9776692898246525792559 },
-            { "level": 8, "resolution": 0.0054931640625, "scale": 2308574.9888346449123262896279 },
-            { "level": 9, "resolution": 0.00274658203125, "scale": 1154287.494417322456163144814 },
-            { "level": 10, "resolution": 0.001373291015625, "scale": 577143.74720866122808157240698 },
-            { "level": 11, "resolution": 0.0006866455078125, "scale": 288571.87360433061404078620349 },
-            { "level": 12, "resolution": 0.00034332275390625, "scale": 144285.93680216530702039310175 },
-            { "level": 13, "resolution": 0.000171661376953125, "scale": 72142.968401082653510196550873 },
-            { "level": 14, "resolution": 8.58306884765625e-005, "scale": 36071.484200541326755098275436 },
-            { "level": 15, "resolution": 4.291534423828125e-005, "scale": 18035.742100270663377549137718 },
-            { "level": 16, "resolution": 2.1457672119140625e-005, "scale": 9017.871050135331688774568859 },
-            { "level": 17, "resolution": 1.0728836059570313e-005, "scale": 4508.9355250676658443872844296 },
-            { "level": 18, "resolution": 5.3644180297851563e-006, "scale": 2254.4677625338329221936422148 },
-            { "level": 19, "resolution": 0.000002682209014892578125, "scale": 1127.2338812669164610968211074 },
-            { "level": 20, "resolution": 0.0000013411045074462890625, "scale": 563.61694063345823054841055369 }
-        ]
+    /**----------定义一些常量------ */
+    //----------------天地图相关---------------//
+    //天地图GCS2000坐标系
+    var TDTSR = new SpatialReference({ wkid: 4490 });
+    //天地图切片信息
+    //临海初始化范围
+    var LH_EXTENT = new Extent({
+        xmin: 120.82287337300001,
+        ymin: 28.666733309,
+        xmax: 121.71025052300001,
+        ymax: 29.068217945,
+        spatialReference: TDTSR
     });
-    var tileExtent = new Extent(-180.0, -90.0, 180.0, 90.0, TDTSR);
-    var layerInfo = new WMTSLayerInfo({
-        "tileInfo": tileInfo,
-        "fullExtent": bounds,
-        "initialExtent": bounds,
-        "identifier": "zjemap",
-        "tileMatrixSet": "esritilematirx",
-        "format": "png",
-        "style": "default"
-    });
-    var resourceInfo = {
-        "version": "1.0.0",
-        "layerInfos": [layerInfo]
-    };
-    var options = {
-        "serviceMode": "KVP",
-        "resourceInfo": resourceInfo,
-        "layerInfo": layerInfo
-    };
-    //浙江电子地图
-    wmtsLayer = new WMTSLayer("http://ditu.zj.cn/services/wmts/zjemap", options);
+    /**----------定义一些变量------ */
+    var river_url = "http://60.191.132.130:6080/arcgis/rest/services/ZJ_TZ_LH_RIVER_TOWN/MapServer";
+    var map; //地图
+    var tdt_basemap_vec; //底图组件
+    var tdt_basemap_img; //底图组件
+    var tdt_basemaplayer_vec; //天地图电子地图图层组件
+    var tdt_basemaplayer_img; //天地图卫星影像地图图层组件
+    var identifyTask;
+    var identifyParameters;
+    //定义popup窗体的填充样式，创建dom节点
+    var popup = new Popup({
+        fillSymbol: new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([255, 0, 0]), 2), new Color([255, 255, 0, 0.25]))
+    }, domConstruct.create("div"));
     map = new Map("map", {
-        extent: bounds,
-        zoom: 12
+        extent: LH_EXTENT,
+        zoom: 11,
+        logo: false,
+        infoWindow: popup
     });
-    map.addLayer(wmtsLayer);
-    var mapNode = dom.byId("map");
-    on(mapNode, "click", function (evt) {
-        alert("x:" + evt.mapPoint.x + ",y:" + evt.mapPoint.y);
+    map.on("load", mapReady);
+    //天地图_电子地图
+    var tdt_options = new TDTOptions();
+    var tdt_vec_layer = new WebTiledLayer(tdt_options.vec_pattern, tdt_options);
+    var tdt_img_layer = new WebTiledLayer(tdt_options.img_pattern, tdt_options);
+    var tdt_cva_layer = new WebTiledLayer(tdt_options.cva_pattern, tdt_options);
+    var addv_town = new ArcGISDynamicMapServiceLayer("http://60.191.132.130:6080/arcgis/rest/services/ZJ_TZ_LH_ADDV_TOWN/MapServer");
+    var addv_river = new ArcGISDynamicMapServiceLayer(river_url);
+    var river_town_featurelayer = new FeatureLayer("http://60.191.132.130:6080/arcgis/rest/services/ZJ_TZ_LH_RIVER_TOWN/MapServer/0");
+    map.addLayer(tdt_vec_layer, 1);
+    map.addLayer(addv_river, 3);
+    map.addLayer(addv_town, 4);
+    map.addLayer(tdt_cva_layer);
+    /**
+     * @description:地图加载完成时执行的方法
+     */
+    function mapReady() {
+        map.on("click", executeIdentifyTask);
+        identifyTask = new IdentifyTask(river_url);
+        identifyParameters = new IdentifyParameters();
+        identifyParameters.tolerance = 3;
+        identifyParameters.returnGeometry = true;
+        identifyParameters.layerIds = [0];
+        identifyParameters.layerOption = IdentifyParameters.LAYER_OPTION_ALL;
+        identifyParameters.width = map.width;
+        identifyParameters.height = map.height;
+    }
+    function executeIdentifyTask(event) {
+        console.log("进入查询函数");
+        //在点击时设置查询参数
+        identifyParameters.geometry = event.mapPoint;
+        identifyParameters.mapExtent = map.extent;
+        var deferred = identifyTask.execute(identifyParameters).addCallback(function (response) {
+            return Array.map(response, function (result) {
+                var feature = result.feature; //要素
+                var layerName = result.layerName; //图层名
+                console.log("图层名：" + result.layerName);
+                feature.attributes.layerName = layerName; //要素属性值为layername
+                if (layerName == '临海市镇级及以上河流') {
+                    console.log("确认是要查询的图层");
+                    var riverTemplate = new InfoTemplate("", "河流编码：${RVCD} <br/>河流名称：${RVNM} <br/> 河流等级: ${等级}");
+                    feature.setInfoTemplate(riverTemplate);
+                }
+                else {
+                    var buildingFootprintTemplate = new InfoTemplate("", "没有查询到河流信息");
+                    feature.setInfoTemplate(buildingFootprintTemplate);
+                }
+                return feature;
+            });
+        });
+        map.infoWindow.setFeatures([deferred]);
+        map.infoWindow.show(event.mapPoint);
+    }
+    /**-------------地图组件-------------- */
+    /**-------------方法-------------- */
+    /**
+     *
+     * @param map 地图对象
+     * @param point 鼠标点击点
+     * @param toleranceInPixel 容差（像素）
+     */
+    function pointToExtent(map, point, toleranceInPixel) {
+        var pixelWidth = map.extent.getWidth() / map.width; //计算当前一个像素对应的实际长度
+        var toleranceInMapCoords = toleranceInPixel * pixelWidth; //实际容差
+        return new Extent(point.x - toleranceInMapCoords, //最小X
+        point.y - toleranceInMapCoords, //最小Y
+        point.x + toleranceInMapCoords, point.y + toleranceInMapCoords, map.spatialReference);
+    }
+    /**-------------事件-------------- */
+    var imgBtn = dom.byId("img_basemap");
+    var vecBtn = dom.byId("vec_basemap");
+    on(imgBtn, "click", function () {
+        console.log("imgbutn clicked!");
+        map.removeLayer(tdt_vec_layer);
+        map.addLayer(tdt_img_layer, 0);
+    });
+    on(vecBtn, "click", function () {
+        console.log("vecbutn clicked!");
+        map.removeLayer(tdt_img_layer);
+        map.addLayer(tdt_vec_layer, 0);
     });
 });
 //# sourceMappingURL=LHTDT.js.map

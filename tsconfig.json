@@ -13,6 +13,8 @@
     "./src/js/TDT/*",
     "./src/js/TDT/LH/*",
     "./src/js/yxf/layout/*",
-    "./src/js/maplayer/*"
+    "./src/js/maplayer/*",
+    "./src/js/dynamic_layer/*",
+    "./src/js/popup/*"
   ]
 }

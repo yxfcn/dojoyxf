@@ -1,26 +1,101 @@
 <!DOCTYPE html>
-<html >
+<html>
+
 <head>
     <meta charset="UTF-8">
     <title>临海天地图测试</title>
-    <link rel="stylesheet" href="http://localhost:8080/arcgis_js_api/3.22/esri/css/esri.css">
+    <link rel="stylesheet" href="http://localhost:8080/arcgis_js_api/3.23/esri/css/esri.css">
+    <link rel="stylesheet" href="http://localhost:8080/arcgis_js_api/3.23/dijit/themes/claro/claro.css">
     <style>
-        html, body, #map { height: 100%; width: 100%; margin: 0; padding: 0; }
+        html,
+        body,
+        #map {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <style>
+        .esriBasemapGallery {}
+
+        .esriBasemapGalleryNode {
+            float: left;
+            margin-right:0.25em;
+            width: auto;            
+        }
+
+        .esriBasemapGalleryLabelContainer {
+            background-color: transparent;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: block;
+            font-size:small;
+        }
+
+        .esriBasemapGalleryThumbnail {
+            height: 67px;
+            width: 100px;
+            border: 1px solid #fff;
+            margin: 1px;
+            -moz-box-shadow: 0px 0px 7px #000;
+            -webkit-box-shadow: 0px 0px 7px #000;
+            box-shadow: 0px 0px 7px #000;
+        }
+
+        .esriBasemapGallerySelectedNode .esriBasemapGalleryThumbnail {
+            border: 2px solid rgb(70, 200, 252);
+            margin: 0;
+        }
+
+        .esriBasemapGalleryMessage {}
+
+        #change_basemap{
+            position:absolute;
+            left:20px; 
+            bottom:10px; 
+            z-Index:999;
+
+        }
     </style>
     <script>
-        window.dojoConfig={
-            deps:["tdt/LHTDT"],
-            packages:[
+        var srcPath = window.location.pathname.substr(0, window.location.pathname.lastIndexOf("src"));
+        console.log(srcPath);
+        window.dojoConfig = {
+            deps: ["tdt/LHTDT"],
+            packages: [
                 {
-                    name:"tdt",
-                    location:window.location.origin+"/dojoyxf/src/js/TDT"
+                    name: "tdt",
+                    location: srcPath + "src/js/TDT"
                 }
-            ]
+            ],
+            async: true
         }
     </script>
-    <script src="http://localhost:8080/arcgis_js_api/3.22/init.js"></script>
+    <script src="http://localhost:8080/arcgis_js_api/3.23/init.js"></script>
 </head>
-<body>
-<div id="map"></div>
+
+<body class="claro">
+    <div data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design:'headline', gutters:false" style="width:100%;height:100%;margin:0;">
+
+        <div id="map" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center'" style="padding:0;">
+
+            <div style="position:absolute; right:20px; bottom:10px; z-Index:999;">
+                <div data-dojo-type="dijit/TitlePane" data-dojo-props="title:'底图切换', open:false">
+                    <div data-dojo-type="dijit/layout/ContentPane" style="width:auto; height:auto; overflow:auto;">
+                        <div id="basemapGallery"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="change_basemap">
+        <button id="vec_basemap">电子地图</button>
+        <button id="img_basemap">卫星影像</button>
+    </div>
 </body>
+
 </html>

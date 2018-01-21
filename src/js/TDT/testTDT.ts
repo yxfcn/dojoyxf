@@ -1,34 +1,34 @@
 ///<reference path="../../typings/typings.d.ts"/>
-import parser=require("dojo/parser");
-import Extent=require("esri/geometry/Extent");
+import parser = require("dojo/parser");
+import Extent = require("esri/geometry/Extent");
 import TileInfo = require("esri/layers/TileInfo");
 import SpatialReference = require("esri/SpatialReference");
 import WebTiledLayer = require("esri/layers/WebTiledLayer");
 //import WMTSLayer = require("esri/layers/WMTSLayer");
 import Map = require("esri/map");
-import on=require("dojo/on");
-import dom=require("dojo/dom");
+import on = require("dojo/on");
+import dom = require("dojo/dom");
 
 
 console.log("Come in");
 parser.parse();
-var map, tdtImg,TDTSR;
-TDTSR=new SpatialReference({wkid:4490});
-var bounds=new Extent(117.599014,26.827559,123.45579,31.564402,TDTSR);
-var fullExtent=new Extent(-180,-90,180,90,TDTSR);
-var tileInfo=new TileInfo({
-    "dpi":96,
+var map, tdtImg, TDTSR;
+TDTSR = new SpatialReference({ wkid: 4490 });
+var bounds = new Extent(117.599014, 26.827559, 123.45579, 31.564402, TDTSR);
+var fullExtent = new Extent(-180, -90, 180, 90, TDTSR);
+var tileInfo = new TileInfo({
+    "dpi": 96,
 
-    "compressionQuality":0,
-    "spatialReference":TDTSR,
-    "rows":256,
-    "cols":256,
-    "origin":{
-        "x":-180,
-        "y":90
+    "compressionQuality": 0,
+    "spatialReference": TDTSR,
+    "rows": 256,
+    "cols": 256,
+    "origin": {
+        "x": -180,
+        "y": 90
     },
 
-    "lods":[
+    "lods": [
         { "level": 0, "resolution": 1.40625, "scale": 590995197.14166909755553014475 },
         { "level": 1, "resolution": 0.703125, "scale": 295497598.57083454877776507238 },
         { "level": 2, "resolution": 0.3515625, "scale": 147748799.28541727438888253619 },
@@ -54,29 +54,29 @@ var tileInfo=new TileInfo({
 });
 var tileExtent = new Extent(-180.0, -90.0, 180.0, 90.0, TDTSR);
 
-var urlPattern="http://${subDomain}.tianditu.com/img_c/wmts?SERVICE=WMTS&VERSION=1.0.0&REQUEST=GetTile&LAYER=img&STYLE="
-    +"default&FORMAT=&TILEMATRIXSET=c&TILEMATRIX=${level}&TILEROW=${row}&TILECOL=${col}&format=tiles";
-var cvaPattern="http://t${subDomain}.tianditu.com/cva_c/wmts?SERVICE=WMTS&VERSION=1.0.0&REQUEST=GetTile&LAYER=cva&STYLE="
-    +"default&FORMAT=&TILEMATRIXSET=c&TILEMATRIX=${level}&TILEROW=${row}&TILECOL=${col}&format=tiles";
-var ciaPattern="http://t${subDomain}.tianditu.cn/DataServer?T=cia_c&X=${col}&Y=${row}&L=${level}"
-var options={
-    "fullExtent":fullExtent,
-    "initialExtent":fullExtent,
-    "subDomains":[0,1,2,3,4,5,6,7],
-    "tileInfo":tileInfo
+var urlPattern = "http://${subDomain}.tianditu.com/img_c/wmts?SERVICE=WMTS&VERSION=1.0.0&REQUEST=GetTile&LAYER=img&STYLE="
+    + "default&FORMAT=&TILEMATRIXSET=c&TILEMATRIX=${level}&TILEROW=${row}&TILECOL=${col}&format=tiles";
+var cvaPattern = "http://t${subDomain}.tianditu.com/cva_c/wmts?SERVICE=WMTS&VERSION=1.0.0&REQUEST=GetTile&LAYER=cva&STYLE="
+    + "default&FORMAT=&TILEMATRIXSET=c&TILEMATRIX=${level}&TILEROW=${row}&TILECOL=${col}&format=tiles";
+var ciaPattern = "http://t${subDomain}.tianditu.cn/DataServer?T=cia_c&X=${col}&Y=${row}&L=${level}"
+var options = {
+    "fullExtent": fullExtent,
+    "initialExtent": fullExtent,
+    "subDomains": [0, 1, 2, 3, 4, 5, 6, 7],
+    "tileInfo": tileInfo
 }
 
 
 //浙江电子地图
-tdtImg = new WebTiledLayer(urlPattern,options);
-var tdt_cva=new WebTiledLayer(cvaPattern,options);
-var tdt_cia=new WebTiledLayer(ciaPattern,options);
+tdtImg = new WebTiledLayer(urlPattern, options);
+var tdt_cva = new WebTiledLayer(cvaPattern, options);
+var tdt_cia = new WebTiledLayer(ciaPattern, options);
 
 
 
-map=new Map("map",{
-    extent:bounds,
-    zoom:12
+map = new Map("map", {
+    extent: bounds,
+    zoom: 12
 });
 map.addLayer(tdtImg);
 /*map.addLayer(tdt_cva);*/
@@ -85,4 +85,4 @@ map.addLayer(tdt_cia);
 
 
 
-var mapNode=dom.byId("map");
+var mapNode = dom.byId("map");

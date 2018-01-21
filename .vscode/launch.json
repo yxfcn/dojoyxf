@@ -1,0 +1,18 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome against localhost",
+            //"url": "${workspaceFolder}/src/views/dynamic-layer/two-dynamic-layer.html",
+            "webRoot": "${workspaceFolder}",
+            //"file": "${workspaceFolder}/src/views/dynamic-layer/two_dynamic_layer.html"
+            "file": "${workspaceFolder}/src/views/LHTDT.html"
+            //"file": "${workspaceFolder}/src/views/popup/identify_with_popup.html"
+        }
+    ]
+}

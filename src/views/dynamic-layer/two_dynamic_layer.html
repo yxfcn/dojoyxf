@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="http://localhost:8080/arcgis_js_api/3.23/esri/css/esri.css" />
+
+    <title>ArcGIS dynamic and tile layers using Popup and InfoTemplates</title>
+    <style>
+        html,
+        body,
+        #ui-esri-map {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #ui-esri-dijit-geocoder {
+            top: 20px;
+            left: 70px;
+            position: absolute;
+            z-index: 3;
+        }
+
+        .esriPopup .titlePane {
+            text-shadow: none;
+        }
+
+        .esriPopup .titleButton.next {
+            right: 40px;
+        }
+
+        .esriPopup .titleButton.prev {
+            right: 53px;
+        }
+
+        .demographicInfoContent {
+            padding-top: 10px;
+        }
+
+        .demographicInnerSpacing {
+            display: inline-block;
+            width: 8px;
+        }
+
+        .demographicNumericPadding {
+            width: 90px;
+            display: inline-block;
+            text-align: right;
+        }
+    </style>
+    <script>
+        var filePath = window.location.pathname;
+        var srcPath = filePath.substr(0, filePath.indexOf("src") + 3);
+        window.dojoConfig = {
+            deps: ["dynamic_layer/twoDynamicLayer"],
+            packages: [
+                {
+                    name: "dynamic_layer",
+                    location: srcPath + "/js/dynamic_layer"
+                }
+            ],
+            async: true
+        }
+
+    </script>
+</head>
+
+<body>
+    <div id="ui-esri-map"></div>
+    <div id="ui-esri-dijit-geocoder"></div>
+
+    <script src="http://localhost:8080/arcgis_js_api/3.23/init.js"></script>
+</body>
+
+</html>

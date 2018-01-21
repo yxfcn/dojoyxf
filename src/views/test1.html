@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+  <head>
+    <title>jQuery实现DIV层的收缩展开效果-纵向</title>
+    <meta charset="utf-8">
+    <script src="../js/lib/jquery/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <style>
+
+      .text{
+        line-height:22px;
+        padding:0 6px;
+        color:#666;
+      }/*展开时看到的div详情*/
+
+      .box h1{
+        padding-left:10px;
+        height:22px;
+        line-height:22px;/*line-heigt的属性值与height属性值设置成同一个值，实现文字垂直居中*/
+        background:#f1f1f1;
+        font-weight:bold;
+      }
+
+      .box{
+        position:relative;
+        border:1px solid #e7e7e7;/*设置边框，突出显示隐藏层*/
+      }
+
+    </style>
+
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      // 收缩展开效果
+      $(document).ready(function(){
+         $(".box h1").hover(function(){
+           $(this).next(".text").animate({height: 'toggle', opacity: 'toggle'}, "slow");/*.animate()是jQuery的动画函数，在此，我们可以修改DOM元素的CSS样式，实现元素的动态改变*/
+         }
+         ,
+         function(){
+          $(this).next(".text").animate({height: 'toggle', opacity: 'toggle'}, "slow");
+         });
+      });
+    </script>
+
+    <div class="box">
+      <h1>收缩展开效果</h1>
+      <div class="text">
+              <span>only for test </span><br />
+              <span>only for test </span><br />
+              <span>only for test </span><br />
+              <span>only for test </span><br />
+              <span>only for test </span><br />
+      </div>
+      </div>
+      <br />
+
+    </div>
+    <br>
+  </body>
+</html>
