@@ -19,10 +19,10 @@ define(["require", "exports", "dojo/parser", "esri/geometry/Extent", "esri/Spati
     /**----------定义一些变量------ */
     var river_url = "http://60.191.132.130:6080/arcgis/rest/services/ZJ_TZ_LH_RIVER_TOWN/MapServer";
     var map; //地图
-    var tdt_basemap_vec; //底图组件
-    var tdt_basemap_img; //底图组件
-    var tdt_basemaplayer_vec; //天地图电子地图图层组件
-    var tdt_basemaplayer_img; //天地图卫星影像地图图层组件
+    /* let tdt_basemap_vec: Basemap;//底图组件
+    let tdt_basemap_img: Basemap;//底图组件
+    let tdt_basemaplayer_vec: BasemapLayer;//天地图电子地图图层组件
+    let tdt_basemaplayer_img: BasemapLayer;//天地图卫星影像地图图层组件 */
     var identifyTask;
     var identifyParameters;
     //定义popup窗体的填充样式，创建dom节点

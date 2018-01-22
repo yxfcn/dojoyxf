@@ -23,6 +23,7 @@ import IdentifyTask = require("esri/tasks/IdentifyTask");
 import IdentifyParameters = require("esri/tasks/IdentifyParameters");
 import Array=require("dojo/_base/array");
 import TDTOptions=require("./TDTOptions");
+import IdentifyResult=require("esri/tasks/IdentifyResult");
 console.log("Come in");
 parser.parse();
 
@@ -46,10 +47,10 @@ const LH_EXTENT: Extent = new Extent({
 /**----------定义一些变量------ */
 const river_url:string="http://60.191.132.130:6080/arcgis/rest/services/ZJ_TZ_LH_RIVER_TOWN/MapServer";
 let map: Map;//地图
-let tdt_basemap_vec: Basemap;//底图组件
+/* let tdt_basemap_vec: Basemap;//底图组件
 let tdt_basemap_img: Basemap;//底图组件
 let tdt_basemaplayer_vec: BasemapLayer;//天地图电子地图图层组件
-let tdt_basemaplayer_img: BasemapLayer;//天地图卫星影像地图图层组件
+let tdt_basemaplayer_img: BasemapLayer;//天地图卫星影像地图图层组件 */
 
 let identifyTask: IdentifyTask;
 let identifyParameters: IdentifyParameters;
@@ -115,7 +116,7 @@ function executeIdentifyTask(event){
     identifyParameters.geometry = event.mapPoint;
     identifyParameters.mapExtent = map.extent;
 
-    var deferred = identifyTask.execute(identifyParameters).addCallback(function (response) {
+    var deferred = identifyTask.execute(identifyParameters).addCallback(function (response:IdentifyResult[]) {
         return Array.map(response, function (result) {
             let feature = result.feature;//要素
             let layerName = result.layerName;//图层名
