@@ -98,21 +98,23 @@ map.addLayer(tdt_cva_layer);
  * @description:地图加载完成时执行的方法
  */
 function mapReady() {
-    map.on("click", executeIdentifyTask);
-
     identifyTask = new IdentifyTask(river_url);
     identifyParameters = new IdentifyParameters();
     identifyParameters.tolerance = 3;
     identifyParameters.returnGeometry = true;
     identifyParameters.layerIds = [0];
     identifyParameters.layerOption = IdentifyParameters.LAYER_OPTION_ALL;
-    identifyParameters.width = map.width;
-    identifyParameters.height = map.height;
+    
+    map.on("click", executeIdentifyTask);
+
+    
 }
 
 function executeIdentifyTask(event){
     console.log("进入查询函数");
     //在点击时设置查询参数
+    identifyParameters.width = map.width;
+    identifyParameters.height = map.height;
     identifyParameters.geometry = event.mapPoint;
     identifyParameters.mapExtent = map.extent;
 
