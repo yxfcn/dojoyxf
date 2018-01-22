@@ -140,8 +140,8 @@ function executeIdentifyTask(event){
             return feature;
         });
     });
-    map.infoWindow.setFeatures([deferred]);
-    map.infoWindow.show(event.mapPoint);
+    popup.setFeatures([deferred]);
+    popup.show(event.mapPoint);
 }
 
 /**-------------地图组件-------------- */
