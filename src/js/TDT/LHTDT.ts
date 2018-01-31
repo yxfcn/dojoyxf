@@ -58,9 +58,9 @@ let identifyParameters: IdentifyParameters;
 //定义popup窗体的填充样式，创建dom节点
 let popup: Popup = new Popup({
     fillSymbol: new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID,
-        new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([255, 0, 0]), 2),
-        new Color([255, 255, 0, 0.25])
-    )
+        new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+          new Color([255, 0, 0]), 2), new Color([255, 255, 0, 0.25])),
+    zoomFactor:18 //zoom to时的缩放等级
 
 }, domConstruct.create("div"));
 
@@ -69,7 +69,8 @@ map = new Map("map", {
     extent: LH_EXTENT,
     zoom: 11,
     logo: false,
-    infoWindow: popup
+    infoWindow: popup,
+    maxZoom:18
 });
 map.on("load", mapReady);
 
@@ -84,15 +85,19 @@ var tdt_img_layer = new WebTiledLayer(tdt_options.img_pattern, tdt_options);
 var tdt_cva_layer=new WebTiledLayer(tdt_options.cva_pattern,tdt_options);
 
 var addv_town = new ArcGISDynamicMapServiceLayer("http://60.191.132.130:6080/arcgis/rest/services/ZJ_TZ_LH_ADDV_TOWN/MapServer");
+var ZJ_TZ_LH_MNG_L = new ArcGISDynamicMapServiceLayer("http://60.191.132.130:6080/arcgis/rest/services/ZJ_TZ_LH_MNG_L/MapServer");
+
 var addv_river = new ArcGISDynamicMapServiceLayer(river_url);
 var river_town_featurelayer = new FeatureLayer("http://60.191.132.130:6080/arcgis/rest/services/ZJ_TZ_LH_RIVER_TOWN/MapServer/0");
 
 
 
 map.addLayer(tdt_vec_layer, 1);
+map.addLayer(ZJ_TZ_LH_MNG_L, 2);
 map.addLayer(addv_river, 3);
 map.addLayer(addv_town, 4);
 map.addLayer(tdt_cva_layer);
+
 
 /**
  * @description:地图加载完成时执行的方法

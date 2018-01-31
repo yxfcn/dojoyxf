@@ -1,5 +1,6 @@
 define(["require", "exports", "dojo/parser", "esri/geometry/Extent", "esri/SpatialReference", "esri/map", "dojo/on", "dojo/dom", "esri/layers/ArcGISDynamicMapServiceLayer", "esri/layers/WebTiledLayer", "dojo/dom-construct", "esri/Color", "esri/dijit/Popup", "esri/InfoTemplate", "esri/symbols/SimpleFillSymbol", "esri/symbols/SimpleFillSymbol", "esri/layers/FeatureLayer", "esri/tasks/IdentifyTask", "esri/tasks/IdentifyParameters", "dojo/_base/array", "./TDTOptions"], function (require, exports, parser, Extent, SpatialReference, Map, on, dom, ArcGISDynamicMapServiceLayer, WebTiledLayer, domConstruct, Color, Popup, InfoTemplate, SimpleFillSymbol, SimpleLineSymbol, FeatureLayer, IdentifyTask, IdentifyParameters, Array, TDTOptions) {
     "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
     console.log("Come in");
     parser.parse();
     /**----------定义一些常量------ */
@@ -26,13 +27,15 @@ define(["require", "exports", "dojo/parser", "esri/geometry/Extent", "esri/Spati
     var identifyParameters;
     //定义popup窗体的填充样式，创建dom节点
     var popup = new Popup({
-        fillSymbol: new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([255, 0, 0]), 2), new Color([255, 255, 0, 0.25]))
+        fillSymbol: new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([255, 0, 0]), 2), new Color([255, 255, 0, 0.25])),
+        zoomFactor: 18 //zoom to时的缩放等级
     }, domConstruct.create("div"));
     map = new Map("map", {
         extent: LH_EXTENT,
         zoom: 11,
         logo: false,
-        infoWindow: popup
+        infoWindow: popup,
+        maxZoom: 18
     });
     map.on("load", mapReady);
     //天地图_电子地图
@@ -41,9 +44,11 @@ define(["require", "exports", "dojo/parser", "esri/geometry/Extent", "esri/Spati
     var tdt_img_layer = new WebTiledLayer(tdt_options.img_pattern, tdt_options);
     var tdt_cva_layer = new WebTiledLayer(tdt_options.cva_pattern, tdt_options);
     var addv_town = new ArcGISDynamicMapServiceLayer("http://60.191.132.130:6080/arcgis/rest/services/ZJ_TZ_LH_ADDV_TOWN/MapServer");
+    var ZJ_TZ_LH_MNG_L = new ArcGISDynamicMapServiceLayer("http://60.191.132.130:6080/arcgis/rest/services/ZJ_TZ_LH_MNG_L/MapServer");
     var addv_river = new ArcGISDynamicMapServiceLayer(river_url);
     var river_town_featurelayer = new FeatureLayer("http://60.191.132.130:6080/arcgis/rest/services/ZJ_TZ_LH_RIVER_TOWN/MapServer/0");
     map.addLayer(tdt_vec_layer, 1);
+    map.addLayer(ZJ_TZ_LH_MNG_L, 2);
     map.addLayer(addv_river, 3);
     map.addLayer(addv_town, 4);
     map.addLayer(tdt_cva_layer);
