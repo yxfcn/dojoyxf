@@ -1,7 +1,6 @@
 ///<reference path="../../typings/typings.d.ts"/>
 define(["require", "exports", "esri/map", "esri/InfoTemplate", "esri/layers/ArcGISDynamicMapServiceLayer", "esri/symbols/SimpleFillSymbol", "esri/symbols/SimpleLineSymbol", "esri/tasks/IdentifyTask", "esri/tasks/IdentifyParameters", "esri/dijit/Popup", "dojo/_base/array", "esri/Color", "dojo/dom-construct"], function (require, exports, Map, InfoTemplate, ArcGISDynamicMapServiceLayer, SimpleFillSymbol, SimpleLineSymbol, IdentifyTask, IdentifyParameters, Popup, Array, Color, domConstruct) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
     var identifyTask;
     var identifyParameters;
     //定义popup窗体的填充样式，创建dom节点

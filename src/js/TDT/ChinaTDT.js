@@ -1,6 +1,5 @@
 define(["require", "exports", "dojo/parser", "esri/geometry/Extent", "esri/layers/TileInfo", "esri/SpatialReference", "esri/layers/WMTSLayerInfo", "esri/layers/WMTSLayer", "esri/map", "dojo/dom"], function (require, exports, parser, Extent, TileInfo, SpatialReference, WMTSLayerInfo, WMTSLayer, Map, dom) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
     console.log("Come in");
     parser.parse();
     var map, wmtsLayer, TDTSR;

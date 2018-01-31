@@ -182,3 +182,17 @@ on(vecBtn, "click", function () {
    
 })
 
+map.on("zoom-start",function(evt){
+
+    console.log("开始缩放");
+    console.log("缩放点："+evt.anchor.x+","+evt.anchor.y);
+    console.log("缩放前范围："+evt.extent.xmin+","+evt.extent.ymin+";"+evt.extent.xmax+","+evt.extent.ymax);
+    console.log("缩放前级别："+evt.level);
+});
+map.on("zoom-end",function(evt){
+    
+        console.log("缩放后");
+        console.log("缩放点："+evt.anchor.x+","+evt.anchor.y);
+        console.log("缩放后范围："+evt.extent.xmin+","+evt.extent.ymin+";"+evt.extent.xmax+","+evt.extent.ymax);
+        console.log("缩放后级别："+evt.level);
+    });

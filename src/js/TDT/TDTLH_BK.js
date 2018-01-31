@@ -1,6 +1,5 @@
 define(["require", "exports", "dojo/parser", "esri/geometry/Extent", "esri/layers/TileInfo", "esri/SpatialReference", "esri/map", "dojo/on", "dojo/dom", "esri/layers/ArcGISDynamicMapServiceLayer", "esri/layers/WebTiledLayer", "dojo/dom-construct", "esri/Color", "esri/dijit/Popup", "esri/InfoTemplate", "esri/symbols/SimpleFillSymbol", "esri/symbols/SimpleFillSymbol", "esri/layers/FeatureLayer", "esri/dijit/Basemap", "esri/dijit/BasemapLayer", "esri/tasks/IdentifyTask", "esri/tasks/IdentifyParameters", "dojo/_base/array", "./TDTOptions"], function (require, exports, parser, Extent, TileInfo, SpatialReference, Map, on, dom, ArcGISDynamicMapServiceLayer, WebTiledLayer, domConstruct, Color, Popup, InfoTemplate, SimpleFillSymbol, SimpleLineSymbol, FeatureLayer, Basemap, BasemapLayer, IdentifyTask, IdentifyParameters, Array, TDTOptions) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
     console.log("Come in");
     parser.parse();
     /**----------定义一些常量------ */

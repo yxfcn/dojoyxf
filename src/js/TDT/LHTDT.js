@@ -1,6 +1,5 @@
 define(["require", "exports", "dojo/parser", "esri/geometry/Extent", "esri/SpatialReference", "esri/map", "dojo/on", "dojo/dom", "esri/layers/ArcGISDynamicMapServiceLayer", "esri/layers/WebTiledLayer", "dojo/dom-construct", "esri/Color", "esri/dijit/Popup", "esri/InfoTemplate", "esri/symbols/SimpleFillSymbol", "esri/symbols/SimpleFillSymbol", "esri/layers/FeatureLayer", "esri/tasks/IdentifyTask", "esri/tasks/IdentifyParameters", "dojo/_base/array", "./TDTOptions"], function (require, exports, parser, Extent, SpatialReference, Map, on, dom, ArcGISDynamicMapServiceLayer, WebTiledLayer, domConstruct, Color, Popup, InfoTemplate, SimpleFillSymbol, SimpleLineSymbol, FeatureLayer, IdentifyTask, IdentifyParameters, Array, TDTOptions) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
     console.log("Come in");
     parser.parse();
     /**----------定义一些常量------ */
@@ -115,6 +114,18 @@ define(["require", "exports", "dojo/parser", "esri/geometry/Extent", "esri/Spati
         console.log("vecbutn clicked!");
         map.removeLayer(tdt_img_layer);
         map.addLayer(tdt_vec_layer, 0);
+    });
+    map.on("zoom-start", function (evt) {
+        console.log("开始缩放");
+        console.log("缩放点：" + evt.anchor.x + "," + evt.anchor.y);
+        console.log("缩放前范围：" + evt.extent.xmin + "," + evt.extent.ymin + ";" + evt.extent.xmax + "," + evt.extent.ymax);
+        console.log("缩放前级别：" + evt.level);
+    });
+    map.on("zoom-end", function (evt) {
+        console.log("缩放后");
+        console.log("缩放点：" + evt.anchor.x + "," + evt.anchor.y);
+        console.log("缩放后范围：" + evt.extent.xmin + "," + evt.extent.ymin + ";" + evt.extent.xmax + "," + evt.extent.ymax);
+        console.log("缩放后级别：" + evt.level);
     });
 });
 //# sourceMappingURL=LHTDT.js.map

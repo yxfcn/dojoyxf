@@ -1,6 +1,5 @@
 define(["require", "exports", "esri/map", "dojo/dom-construct", "esri/Color", "esri/dijit/Geocoder", "esri/dijit/Popup", "esri/InfoTemplate", "esri/layers/ArcGISDynamicMapServiceLayer", "esri/symbols/SimpleFillSymbol", "esri/symbols/SimpleFillSymbol"], function (require, exports, Map, domConstruct, Color, Geocoder, Popup, InfoTemplate, ArcGISDynamicMapServiceLayer, SimpleFillSymbol, SimpleLineSymbol) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
     ///<reference path="../../typings/typings.d.ts"/>
     /**
      * @description:present two dynamic layer
